@@ -8,7 +8,6 @@ const player = new Vimeo(iframe);
 
 const onPlay = function (time) {
   localStorage.setItem(STORAGE_KEY, time.seconds);
-  // console.log(time.seconds);
 };
 
 player.on('timeupdate', throttle(onPlay, 1000));
