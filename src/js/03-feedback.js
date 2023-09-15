@@ -1,7 +1,8 @@
 import throttle from 'lodash.throttle';
 
 const STORAGE_KEY = 'feedback-form-state';
-const formData = {};
+const formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
 const refs = {
   form: document.querySelector('.feedback-form'),
 };
@@ -18,11 +19,9 @@ function onInputDataForm(event) {
 }
 
 function populateFeedbackFromLocalStorage() {
-  const savedDataForm = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-  if (savedDataForm) {
-    refs.form.elements.email.value = savedDataForm.email;
-    refs.form.elements.message.value = savedDataForm.message;
+  if (formData) {
+    refs.form.elements.email.value = formData.email || '';
+    refs.form.elements.message.value = formData.message || '';
   }
 }
 
